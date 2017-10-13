@@ -22,10 +22,36 @@
 		 * 根据传入年级数 查询每个年纪的学生数据
 		 */
 		public function getDataByGrade($grade){
-			$sql = "select username,score,class from user where grade=".$grade." order by score desc";
+			$sql = "select username,score,class from user where grade= ".$grade." order by score desc";
 			$res = self::getResult($sql);
 			return $res;
 		}
 
+		/**
+		 * 查询所有的年级
+		 */
+		public function getAllGrade(){
+			$sql  = "select distinct(grade) from user order by grade asc";
+			$res = $this->getResult($sql);
+			return $res;
+		}
+
+		/**
+		 * 根据年级数查询所有的班级
+		 */
+		public function getClassByGrade($grade){
+			$sql = "select distinct(class) from user where grade= ".$grade ." order by class asc";
+			$res = $this->getResult($sql);
+			return $res;
+		}
+
+		/**
+		 * 根据年级数班级数查询学生信息
+		 */
+		public function getDataByClassGrade($class,$grade){
+			$sql = "select username,score from user where class=".$class." and grade=".$grade ." order by score desc";
+			$res = $this->getResult($sql);
+			return $res;
+		}
 	}
 ?>
